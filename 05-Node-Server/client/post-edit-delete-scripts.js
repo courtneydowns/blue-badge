@@ -3,7 +3,8 @@
 ************************** */
 function postJournal() {
 console.log('postJournal Function Called')
-}
+
+}  
 /* *************************
 *** UPDATE JOURNAL ***
 ************************** */
