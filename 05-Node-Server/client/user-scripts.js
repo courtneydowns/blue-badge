@@ -31,7 +31,6 @@ fetch("http://localhost:3000/user/create", {
 *** USER LOGIN ***
 ************************** */
 function userLogin() {
-console.log("hi");
 let userEmail = document.getElementById('emailLogin').value;
 let userPass = document.getElementById('pwdLogin').value;
 console.log(userEmail, userPass);
