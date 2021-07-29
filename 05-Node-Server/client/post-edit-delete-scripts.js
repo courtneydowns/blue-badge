@@ -29,14 +29,14 @@ console.log('postJournal Function Called')
 *** UPDATE JOURNAL ***
 ************************** */
 function editJournal(postId) {
-console.log('editJournal Function Called')
+console.log('postId')
 
 const fetch_url = `http://localhost:3000/journal/update/${postId}`
 const accessToken = localStorage.getItem('SessionToken')
 
 let card = document.getElementById(postId)
 let input = document.createElement('input')
-console.log(postId)
+
 
 if (card.childNodes.length < 2) {
     card.appendChild(input)
