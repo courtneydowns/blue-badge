@@ -7,12 +7,13 @@ module.exports = function (seq, DataTypes) {
 
         email:{
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         password:{
             type: DataTypes.STRING,
             allowNull: false
         }
     })
-    return User
+    return User;
 }
