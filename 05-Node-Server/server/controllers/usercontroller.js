@@ -3,10 +3,19 @@
 // let sequelize = require("../db");
 // let User = sequelize.import("../models/user.js");
 
+//Create a new endpoing: /create
+//The endpoint is going to be a post request
+//Hanve an object that matches the model of UserTable (email/password).
+//Let sequelize create a new record in the database (create)
+
 const router = require('express').Router();
 const User = require("../db").import("../models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+
+/* *******************************
+*** USER SIGNUP ***
+******************************** */
 
 router.post("/create", function(req, res) {
 
@@ -29,6 +38,18 @@ router.post("/create", function(req, res) {
     });
 })
 
+/* *******************************
+*** USER SIGNIN ***
+******************************** */
+
+//USER SIGNIN
+//Create a new endpoint: /login
+//The endpoinst is going to be a post request
+//Build a query statement (Hard code in a user's email that exists in the database)
+//Use FindOne
+//Let sequelize return a success
+//If we find one return user info and if user doesn't exist, return "user does not exist"
+
 router.post('/login', function(req,res){
     User.findOne({
         where: {
@@ -45,7 +66,7 @@ router.post('/login', function(req,res){
                     res.status(200).json({
                         user: user,
                         message: "User successfully logged in!",
-                        sessionToken: token 
+                        sessionToken: token, 
             })
 
         } else {
@@ -58,15 +79,6 @@ router.post('/login', function(req,res){
 })
     .catch((err) => res.status(500).json({error: err}));
 });
-
-
-//USER SIGNIN
-//Create a new endpoint: /login
-//The endpoinst is going to be a post request
-//Build a query statement (Hard code in a user's email that exists in the database)
-//Use FindOne
-//Let sequelize return a success
-//If we find one return user info and if user doesn't exist, return "user does not exist"
 
 router.post('/login', function(req,res){
     User.findOne({ where: { email: req.body.user.email } })
