@@ -18,7 +18,7 @@ router.post('/create', validateSession, (req, res) => {
     .then(workoutlog => res.status(200).json(workoutlog))
     .catch(err => res.status(500).json({ error: err }))
 })
-
+console.log("hello")
 /* ***************************
  *** GET ALL LOGS FOR USER ***
  ************************** */
