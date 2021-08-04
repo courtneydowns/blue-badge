@@ -7,12 +7,12 @@ const WorkoutLog = require('../db').import('../models/log');
 /* ***************************
  ***  CREATE WORKOUT LOG ***
  ************************** */
-router.post('/create', validateSession, (req, res) => {
+router.post('/', validateSession, (req, res) => {
     const logEntry = {
         description: req.body.description,
         definition: req.body.definition,
-        result: req.body.definition,
-        owner_id: req.body.owner_id
+        result: req.body.result,
+        owner_id: req.user.id
     }
     WorkoutLog.create(logEntry)
     .then(workoutlog => res.status(200).json(workoutlog))
@@ -22,11 +22,43 @@ console.log("hello")
 /* ***************************
  *** GET ALL LOGS FOR USER ***
  ************************** */
- router.get('/:username', (req, res) => {
-    let username = req.params.username
-    WorkoutLog.findAll({where: {username: username}})
+ router.get('/', validateSession, (req, res) => {
+    let userid  = req.user.id
+    WorkoutLog.findAll({
+        where: {owner_id: userid}
+    })
     .then(workoutlogs => res.status(200).json(workoutlogs))
     .catch(err => res.status(500).json({ error: err }))
+});
+
+/* ***************************
+ *** GET ALL LOGS BY ID ***
+ ************************** */
+
+  router.get('/:id', validateSession, (req, res) => {
+    let userid  = req.user.id
+    WorkoutLog.findAll({
+        where: {owner_id: userid}
+    })
+    .then(workoutlogs => res.status(200).json(workoutlogs))
+    .catch(err => res.status(500).json({ error: err }))
+});
+
+/* ************************************
+ *** UPDATE INDIVIDUAL LOGS BY USER ***
+ *********************************** */
+router.put('/:id', validateSession, (req, res)=> {
+  const updateWorkoutLog = {
+     description: req.body.description,
+     definition: req.body.definition,
+     result: req.body.result, 
+     owner_id: req.user.id
+  };
+  const query = { where: { id: req.params.owner_id, owner: req.user.id }} 
+  
+  WorkoutLog.update(updateWorkoutLog, query)
+  .then((workoutlog) => res.status(200).json(workoutlog))
+  .catch((err) => res.status(500).json({ error: err }));
 });
 
 module.exports = router;

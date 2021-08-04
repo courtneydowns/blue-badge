@@ -113,7 +113,7 @@ function displayMine() {
                 }
                 if (response.length === 0) {
                     let display = document.getElementById('journals')
-                    let header = document.creeateElement('h5')
+                    let header = document.createElement('h5')
                     display.appendChild(header)
                     header.textContent = "You haven't made any posts yet!"
                     header.setAttribute("class", "noPosts")
