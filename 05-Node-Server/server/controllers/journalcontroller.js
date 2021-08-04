@@ -48,7 +48,10 @@ router.get('/:title', function (req, res) {
     .catch(err => res.status(500).json({error: err}))
 })
 
-router.put("/update/:entryId", function (req, res) {
+//Update
+
+//localhost:3000/journal/update/
+router.put("/update/:entryId", validateSession, function (req, res) {
     const updateJournalEntry = {
         title: req.body.journal.title,
         date: req.body.journal.date,
@@ -61,6 +64,8 @@ router.put("/update/:entryId", function (req, res) {
     .then((journals) => res.status(200).json(journals))
     .catch((err) => res.status(500).json({error: err}));
 });
+
+//Delete
 
 router.delete("/delete/:id", validateSession, function (req, res) {
     const query = {where: {id: req.params.id, owner: req.user.id}};

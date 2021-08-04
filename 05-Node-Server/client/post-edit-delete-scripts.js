@@ -25,11 +25,12 @@ console.log('postJournal Function Called')
         console.log(err)
     })
 }  
+
 /* *************************
 *** UPDATE JOURNAL ***
 ************************** */
 function editJournal(postId) {
-console.log('postId')
+console.log(postId)
 
 const fetch_url = `http://localhost:3000/journal/update/${postId}`
 const accessToken = localStorage.getItem('SessionToken')
