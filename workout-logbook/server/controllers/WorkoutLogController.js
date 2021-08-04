@@ -18,7 +18,6 @@ router.post('/', validateSession, (req, res) => {
     .then(workoutlog => res.status(200).json(workoutlog))
     .catch(err => res.status(500).json({ error: err }))
 })
-console.log("hello")
 /* ***************************
  *** GET ALL LOGS FOR USER ***
  ************************** */
@@ -51,14 +50,24 @@ router.put('/:id', validateSession, (req, res)=> {
   const updateWorkoutLog = {
      description: req.body.description,
      definition: req.body.definition,
-     result: req.body.result, 
-     owner_id: req.user.id
+     result: req.body.result 
   };
-  const query = { where: { id: req.params.owner_id, owner: req.user.id }} 
+  const query = { where: { id: req.params.id, owner_id: req.user.id }} 
   
   WorkoutLog.update(updateWorkoutLog, query)
   .then((workoutlog) => res.status(200).json(workoutlog))
   .catch((err) => res.status(500).json({ error: err }));
+});
+
+/* *************************
+*** DELETE LOG ***
+************************** */
+router.delete("/:id", validateSession, function (req, res) {
+    const query = { where: { id: req.params.id, owner_id: req.user.id }};
+
+    WorkoutLog.destroy(query)
+    .then(() => res.status(200).json({ message: "Workout Log Removed" }))
+    .catch((err) => res.status(500).json({ error: err }));
 });
 
 module.exports = router;

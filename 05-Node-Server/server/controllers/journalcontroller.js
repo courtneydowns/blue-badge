@@ -7,7 +7,9 @@ router.get("/practice", validateSession, function(req, res)
 {
     res.send("Hey!! This is a practice route!")
 })
-
+/****************************
+    *****JOURNAL CREATE
+*************************** */
 router.post('/create', validateSession, (req, res) => {
     const journalEntry = {
         title: req.body.journal.title,
@@ -20,14 +22,18 @@ Journal.create(journalEntry)
     .catch(err => res.status(500).json({error: err}))
 })
 
-//GET ALL ENTRIES
+/****************************
+    *****GET ALL ENTRIES
+*************************** */
 router.get("/", (req, res) => {
     Journal.findAll()
     .then(journals => res.status(200).json(journals))
     .catch(err => res.status(500).json({error: err}))
 });
 
-//GET ENTRIES BY USER
+/****************************
+    ***GET ENTRIES BY USER
+*************************** */
 router.get("/mine", validateSession, (req, res) => {
     let userid = req.user.id
     Journal.findAll({
@@ -37,7 +43,9 @@ router.get("/mine", validateSession, (req, res) => {
     .catch(err => res.status(500).json({ error: err}))
 })
 
-//GET ENTRIES BY TITLE
+/****************************
+    ***GET ENTRIES BY TITLE
+*************************** */
 router.get('/:title', function (req, res) {
     let title = req.params.title;
 
@@ -48,9 +56,9 @@ router.get('/:title', function (req, res) {
     .catch(err => res.status(500).json({error: err}))
 })
 
-//Update
-
-//localhost:3000/journal/update/
+/****************************
+    ***UPDATE ENTRIES
+*************************** */
 router.put("/update/:entryId", validateSession, function (req, res) {
     const updateJournalEntry = {
         title: req.body.journal.title,
@@ -65,8 +73,9 @@ router.put("/update/:entryId", validateSession, function (req, res) {
     .catch((err) => res.status(500).json({error: err}));
 });
 
-//Delete
-
+/****************************
+    ***DELETING ENTRIES
+*************************** */
 router.delete("/delete/:id", validateSession, function (req, res) {
     const query = {where: {id: req.params.id, owner: req.user.id}};
 
