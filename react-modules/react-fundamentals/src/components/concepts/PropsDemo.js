@@ -88,8 +88,14 @@ const TinyComponent = (props) => {
   );
 };
 
-// FunctionalComponent.defaultProps = {
-//   string: "This is wild!",
-//   function: () => console.log("Can I see this in my dev tools?"),
-//   selectedStyle: "what style?",
-// };
+FunctionalComponent.defaultProps = {
+  string: "This is wild!",
+  function: () => console.log("Can I see this in my dev tools?"),
+  selectedStyle: "what style?",
+};
+
+FunctionalComponent.propTypes = {
+  string: PropTypes.string.isRequired,
+  function: PropTypes.string.isRequired,
+  selectedStyle: PropTypes.isRequired,
+};
