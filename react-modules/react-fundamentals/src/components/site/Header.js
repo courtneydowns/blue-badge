@@ -5,8 +5,8 @@ const Header = () => {
   return (
     <header>
       <Navbar className="header">
+        <NavbarBrand href="/">React Library</NavbarBrand>
         <Nav className="ml-auto" navbar>
-          <NavbarBrand href="/">React Library</NavbarBrand>
           <NavItem>
             <NavLink href="https://github.com/courtneydowns/blue-badge/tree/main/react-modules/react-fundamentals">
               Github

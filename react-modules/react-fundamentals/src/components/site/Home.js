@@ -18,7 +18,7 @@ const Home = () => {
         <hr />
         <h1>Important Notes</h1>
         <ul>
-          <li>Being component based, you can moe on to the next module.</li>
+          <li>Being component based, you can move on to the next module.</li>
           <li>
             The styling is intentionally bland in some sports. Just a sandbox.
           </li>
