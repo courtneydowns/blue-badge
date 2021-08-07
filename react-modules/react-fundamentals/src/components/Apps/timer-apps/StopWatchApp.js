@@ -4,7 +4,7 @@ const StopWatchApp = () => {
   const startTimeRef = useRef(0);
   const [isRunning, setIsRunning] = useState(false);
   const [time, setTime] = useState(0);
-  const [laps, setLaps] = useState();
+  const [laps, setLaps] = useState([]);
 
   useEffect(() => {
     if (isRunning) {
