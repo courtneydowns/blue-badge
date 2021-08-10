@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import SiteBar from "./home/Navbar";
 import Auth from "./auth/Auth";
 import WorkoutIndex from "./workouts/WorkoutIndex";
